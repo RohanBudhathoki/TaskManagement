@@ -5,6 +5,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:taskmanagementapp/core/error/exception.dart';
 import 'package:taskmanagementapp/core/error/failure.dart';
 import 'package:taskmanagementapp/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:taskmanagementapp/features/auth/data/models/user_model.dart';
 import 'package:taskmanagementapp/features/auth/domain/entities/user_entity.dart';
 import 'package:taskmanagementapp/features/auth/domain/repository/auth_repo.dart';
 
@@ -55,16 +56,15 @@ class AuthRepoImple implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, User>> currentUser() async {
+  Future<Either<Failure, UserModel>> currentUser() async {
     try {
       final currentUser = firebaseAuth.currentUser;
       if (currentUser != null) {
-        // Fetch the user profile data from Firestore
         final userProfile =
             await firestore.collection('profiles').doc(currentUser.uid).get();
         if (userProfile.exists) {
-          // final user = User.fromJson(userProfile.data()!);
-          // return right(user.copyWith(email: currentUser.email));
+          final user = UserModel.fromJson(userProfile.data()!);
+          return right(user.copyWith(email: currentUser.email));
         }
       }
       return left(Failure(message: 'User not logged in!'));

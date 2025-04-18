@@ -4,6 +4,7 @@ import 'package:taskmanagementapp/core/common/widgets/task_card.dart';
 import 'package:taskmanagementapp/features/taskmanger/domain/entities/task_entity.dart';
 import 'package:taskmanagementapp/features/taskmanger/taskmanger/bloc/taskmanage_bloc.dart';
 import 'package:taskmanagementapp/core/enum/task_enum.dart';
+import 'package:taskmanagementapp/features/taskmanger/taskmanger/update_task/update_task.dart';
 
 class StatusRow extends StatelessWidget {
   final TaskStatus status;
@@ -65,10 +66,26 @@ class StatusRow extends StatelessWidget {
                                   ),
                                 ),
                                 childWhenDragging: Opacity(
-                                  opacity: 0.4,
+                                  opacity: 1,
                                   child: TaskCard(task: tasks[index]),
                                 ),
-                                child: TaskCard(task: tasks[index]),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder:
+                                            (_) => UpdateTaskScreen(
+                                              taskId: tasks[index].id,
+                                              initialTitle: tasks[index].title,
+                                              initialDescription:
+                                                  tasks[index].description,
+                                            ),
+                                      ),
+                                    );
+                                  },
+                                  child: TaskCard(task: tasks[index]),
+                                ),
                               ),
                             );
                           },

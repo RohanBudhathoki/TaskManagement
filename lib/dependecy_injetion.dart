@@ -15,6 +15,7 @@ import 'package:taskmanagementapp/features/taskmanger/data/repository/task_repo_
 import 'package:taskmanagementapp/features/taskmanger/domain/repository/task_repo.dart';
 import 'package:taskmanagementapp/features/taskmanger/domain/usecases/creat_task.dart';
 import 'package:taskmanagementapp/features/taskmanger/domain/usecases/get_task.dart';
+import 'package:taskmanagementapp/features/taskmanger/domain/usecases/update_task.dart';
 import 'package:taskmanagementapp/features/taskmanger/domain/usecases/update_task_stage.dart';
 import 'package:taskmanagementapp/features/taskmanger/taskmanger/bloc/taskmanage_bloc.dart';
 
@@ -51,7 +52,6 @@ void _initAuth() {
     ..registerFactory(() => UserSignUp(serviceLocater()))
     ..registerFactory(() => UserLogin(serviceLocater()))
     ..registerFactory(() => UserCurrent(serviceLocater()))
-    // Ensure AppUser is registered
     ..registerLazySingleton<AppUserCubit>(() => AppUserCubit())
     ..registerLazySingleton(
       () => AuthBloc(
@@ -66,17 +66,27 @@ void _initAuth() {
 void _initTask() {
   serviceLocater
     ..registerFactory<TaskRemoteDataSources>(
-      () => TaskDataSource(serviceLocater()),
+      () => TaskDataSource(
+        serviceLocater<FirebaseFirestore>(),
+        serviceLocater<FirebaseAuth>(),
+      ),
     )
-    ..registerFactory<TaskRepo>(() => TaskRepoImple(serviceLocater()))
+    ..registerFactory<TaskRepo>(
+      () => TaskRepoImple(
+        serviceLocater<TaskRemoteDataSources>(),
+        serviceLocater<FirebaseAuth>(),
+      ),
+    )
     ..registerFactory(() => CreatTask(serviceLocater()))
     ..registerFactory(() => GetTask(serviceLocater()))
     ..registerFactory(() => UpdateTaskStage(serviceLocater()))
+    ..registerFactory(() => UpdateTask(serviceLocater()))
     ..registerFactory(
       () => TaskmanageBloc(
         createTask: serviceLocater(),
         getTask: serviceLocater(),
         updateTaskStage: serviceLocater(),
+        updateTask: serviceLocater(),
       ),
     );
 }

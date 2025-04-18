@@ -9,6 +9,7 @@ class TaskModel extends TaskEntity {
     required super.title,
     required super.description,
     required super.status,
+    required super.userId,
   });
 
   Map<String, dynamic> toMap() {
@@ -17,6 +18,7 @@ class TaskModel extends TaskEntity {
       'title': title,
       'description': description,
       'status': status,
+      'userId': userId,
     };
   }
 
@@ -26,6 +28,7 @@ class TaskModel extends TaskEntity {
       title: map['title'] as String,
       description: map['description'] as String,
       status: map['status'] as String,
+      userId: map['userId'],
     );
   }
 
@@ -34,12 +37,14 @@ class TaskModel extends TaskEntity {
     String? title,
     String? description,
     String? status,
+    String? userId,
   }) {
     return TaskModel(
       id: id ?? this.id,
       title: title ?? this.title,
       description: description ?? this.description,
       status: status ?? this.status,
+      userId: userId ?? this.userId,
     );
   }
 

@@ -14,4 +14,11 @@ abstract class TaskRepo {
     required String taskStatus,
     required String taskId,
   });
+
+  Future<Either<Failure, TaskEntity>> updatTask({
+    required String title,
+    required String description,
+    required String taskStatus,
+    required String taskId,
+  });
 }

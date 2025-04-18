@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taskmanagementapp/core/common/utils/flush_bar.dart';
 import 'package:taskmanagementapp/core/common/utils/text_controller.dart';
 import 'package:taskmanagementapp/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:taskmanagementapp/features/auth/presentation/signup/sign_up.dart';
 import 'package:taskmanagementapp/features/auth/presentation/widgets/comm_auth_button.dart';
 import 'package:taskmanagementapp/features/auth/presentation/widgets/register_textfield.dart';
+import 'package:taskmanagementapp/features/taskmanger/taskmanger/task_screen/task_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -18,6 +20,12 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is AuthFailure) {
             flushBar(context, state.message);
+          }
+          if (state is AuthSucess) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => TaskScreen()),
+            );
           }
         },
 
@@ -58,6 +66,15 @@ class LoginScreen extends StatelessWidget {
                       );
                     },
                     text: 'Login',
+                  ),
+                  CommonAuthButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => SignUpScreen()),
+                      );
+                    },
+                    text: 'Go to Sign IN',
                   ),
                 ],
               ),
