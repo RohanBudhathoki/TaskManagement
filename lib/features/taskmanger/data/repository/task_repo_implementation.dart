@@ -46,11 +46,10 @@ class TaskRepoImple implements TaskRepo {
   Stream<Either<Failure, List<TaskEntity>>> getTasks() async* {
     try {
       final stream = remoteDataSources.getTasks();
-      debugger();
-      // Emit real-time updates
+
       await for (final taskList in stream) {
         print("this is Stream ${taskList}");
-        yield right(taskList); // Continuously yield the updated task list
+        yield right(taskList);
       }
     } catch (e) {
       yield left(Failure(message: 'Error fetching tasks: ${e.toString()}'));

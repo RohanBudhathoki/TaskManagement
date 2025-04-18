@@ -47,19 +47,23 @@ class TaskmanageBloc extends Bloc<TaskmanageEvent, TaskmanageState> {
 
   void _getTasks(GetTaskBLoc event, Emitter<TaskmanageState> emit) async {
     emit(TaskmanageLoading());
-    await _taskSubscription?.cancel();
 
-    _taskSubscription = _getTask(NoParams()).listen(
-      (res) async {
-        res.fold(
-          (l) => emit(TaskmanageFailure(l.message)),
-          (r) => emit(TaskManageDisplaySucess(r)),
-        );
-      },
-      onError: (e) {
-        emit(TaskmanageFailure("Error: ${e.toString()}"));
-      },
-    );
+    try {
+      await emit.forEach<Either<Failure, List<TaskEntity>>>(
+        _getTask(
+          NoParams(),
+        ), // this returns a Stream<Either<Failure, List<TaskEntity>>>
+        onData: (res) {
+          return res.fold(
+            (l) => TaskmanageFailure(l.message),
+            (r) => TaskManageDisplaySucess(r),
+          );
+        },
+        onError: (error, _) => TaskmanageFailure("Error: ${error.toString()}"),
+      );
+    } catch (e) {
+      emit(TaskmanageFailure("Unexpected error: $e"));
+    }
   }
 
   @override
