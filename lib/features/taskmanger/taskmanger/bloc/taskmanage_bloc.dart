@@ -17,7 +17,7 @@ class TaskmanageBloc extends Bloc<TaskmanageEvent, TaskmanageState> {
   final GetTask _getTask;
   final UpdateTaskStage _updateTaskStage;
   StreamSubscription<Either<Failure, List<TaskEntity>>>? _taskSubscription;
-
+  bool isKanbanView = false;
   TaskmanageBloc({
     required CreatTask createTask,
     required GetTask getTask,
@@ -33,6 +33,7 @@ class TaskmanageBloc extends Bloc<TaskmanageEvent, TaskmanageState> {
     on<CreateTaskBloc>(_createTasks);
     on<GetTaskBLoc>(_getTasks);
     on<UpdateTaskStageBloc>(_updateTaskStages);
+    on<ToggleViewEvent>(_toggleView);
   }
   void _createTasks(CreateTaskBloc event, Emitter<TaskmanageState> emit) async {
     final res = await _createTask(
@@ -43,6 +44,11 @@ class TaskmanageBloc extends Bloc<TaskmanageEvent, TaskmanageState> {
       (l) => emit(TaskmanageFailure(l.message)),
       (r) => emit(TaskmanageSucess()),
     );
+  }
+
+  void _toggleView(ToggleViewEvent event, Emitter<TaskmanageState> emit) {
+    isKanbanView = !isKanbanView;
+    emit(TaskManageViewToggled(isKanbanView)); // Emit the new state
   }
 
   void _getTasks(GetTaskBLoc event, Emitter<TaskmanageState> emit) async {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taskmanagementapp/features/taskmanger/taskmanger/add_task/widget/common_textfield.dart';
+import 'package:taskmanagementapp/features/taskmanger/taskmanger/widget/common_textfield.dart';
 import 'package:taskmanagementapp/features/taskmanger/taskmanger/bloc/taskmanage_bloc.dart';
 
 class AddTaskScreen extends StatefulWidget {

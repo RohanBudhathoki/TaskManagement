@@ -18,3 +18,5 @@ final class UpdateTaskStageBloc extends TaskmanageEvent {
 
   UpdateTaskStageBloc({required this.taskId, required this.status});
 }
+
+class ToggleViewEvent extends TaskmanageEvent {}

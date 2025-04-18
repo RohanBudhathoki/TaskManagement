@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TaskFormField extends StatelessWidget {
-  TextEditingController? controller;
+  final TextEditingController? controller;
   final String hintText;
   final int? maxLines;
 
-  TaskFormField({
+  const TaskFormField({
     super.key,
     required this.hintText,
     this.maxLines,

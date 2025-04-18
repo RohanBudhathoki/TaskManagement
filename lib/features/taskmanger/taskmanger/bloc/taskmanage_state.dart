@@ -21,3 +21,9 @@ final class TaskManageDisplaySucess extends TaskmanageState {
 }
 
 final class TaskStageUpdateState extends TaskmanageState {}
+
+class TaskManageViewToggled extends TaskmanageState {
+  final bool isKanbanView;
+
+  TaskManageViewToggled(this.isKanbanView);
+}
