@@ -127,7 +127,6 @@ class TaskDataSource implements TaskRemoteDataSources {
     }
 
     try {
-      debugger();
       final docRef = firestore
           .collection('users')
           .doc(userId)
