@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanagementapp/core/theme/app_colors.dart';
 
 class CommonAuthButton extends StatelessWidget {
   final String text;
@@ -18,7 +19,7 @@ class CommonAuthButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
+          backgroundColor: AppColors.blackColor,
           elevation: 0,
         ),
         child: Text(
@@ -26,7 +27,7 @@ class CommonAuthButton extends StatelessWidget {
           style: const TextStyle(
             fontSize: 18,
             height: 1.3,
-            color: Colors.white,
+            color: AppColors.whiteColor,
             fontWeight: FontWeight.w700,
             fontFamily: 'Mulish',
           ),

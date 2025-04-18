@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taskmanagementapp/core/common/utils/flush_bar.dart';
+import 'package:taskmanagementapp/core/common/utils/space.dart';
 import 'package:taskmanagementapp/core/common/utils/text_controller.dart';
+import 'package:taskmanagementapp/core/theme/app_colors.dart';
 import 'package:taskmanagementapp/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:taskmanagementapp/features/auth/presentation/login/login.dart';
 import 'package:taskmanagementapp/features/auth/presentation/widgets/comm_auth_button.dart';
 import 'package:taskmanagementapp/features/auth/presentation/widgets/register_textfield.dart';
 
@@ -19,62 +22,130 @@ class SignUpScreen extends StatelessWidget {
           if (state is AuthFailure) {
             flushBar(context, state.message);
           }
+          if (state is AuthSucess) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => LoginScreen()),
+            );
+          }
         },
 
         builder: (context, state) {
           if (state is AuthLoading) {
             return const CircularProgressIndicator();
           }
-          return SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(24)),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 400),
-                child: Column(
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+              color: AppColors.lightBackGround.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: ListView(
+              children: [
+                Column(
                   children: [
-                    // SpaceH200(),
+                    SpaceH100(),
+                    Text(
+                      'Create An Account',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SpaceH36(),
                     RegisterTextfield(
                       obscureText: false,
                       keyboardType: TextInputType.emailAddress,
                       controller: controller.nameController,
                       hintText: 'Name',
                     ),
-                    // SpaceH20(),
+                    const SpaceH20(),
                     RegisterTextfield(
-                      controller: controller.emailController,
                       obscureText: false,
                       keyboardType: TextInputType.emailAddress,
-
+                      controller: controller.emailController,
                       hintText: 'Email',
                     ),
-
-                    // const SpaceH20(),
+                    const SpaceH20(),
                     RegisterTextfield(
-                      controller: controller.passwordController,
                       obscureText: true,
                       keyboardType: TextInputType.text,
-
-                      hintText: ' Password',
+                      controller: controller.passwordController,
+                      hintText: 'Password',
                     ),
-                    // const SpaceH28(),
+                    SpaceH12(),
+
                     CommonAuthButton(
-                      onPressed: () async {
+                      onPressed: () {
                         context.read<AuthBloc>().add(
                           AuthSignUp(
-                            email: controller.emailController.text,
-                            password: controller.passwordController.text,
-                            name: controller.nameController.text,
+                            name: controller.nameController.text.trim(),
+                            email: controller.emailController.text.trim(),
+                            password: controller.passwordController.text.trim(),
                           ),
                         );
                       },
-                      text: 'Sign up',
+                      text: state is AuthLoading ? 'Loading...' : 'Sign up',
+                    ),
+                    SpaceH44(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: Divider(
+                            indent: 28.5,
+                            thickness: 1.43,
+                            color: AppColors.darkBackGround,
+                          ),
+                        ),
+                        Text(
+                          'Or sign in with  ',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.darkBackGround,
+                          ),
+                        ),
+                        Expanded(
+                          child: Divider(
+                            endIndent: 28.5,
+                            thickness: 1.43,
+                            color: AppColors.darkBackGround,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SpaceH30(),
+
+                    SpaceH40(),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => LoginScreen()),
+                        );
+                      },
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'Already have an account?  ',
+                          style: DefaultTextStyle.of(
+                            context,
+                          ).style.copyWith(fontSize: 20),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: 'Signup',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
-              ),
+              ],
             ),
           );
         },

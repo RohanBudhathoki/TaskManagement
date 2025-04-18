@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taskmanagementapp/core/common/widgets/task_card.dart';
+import 'package:taskmanagementapp/core/theme/app_colors.dart';
 import 'package:taskmanagementapp/features/taskmanger/domain/entities/task_entity.dart';
 import 'package:taskmanagementapp/features/taskmanger/taskmanger/bloc/taskmanage_bloc.dart';
 import 'package:taskmanagementapp/core/enum/task_enum.dart';
@@ -24,7 +25,7 @@ class StatusRow extends StatelessWidget {
         builder: (context, candidateData, rejectedData) {
           return Card(
             margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            color: Colors.grey[200],
+            color: status.cardColor,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -32,16 +33,17 @@ class StatusRow extends StatelessWidget {
                 children: [
                   Text(
                     status.label,
-                    style: const TextStyle(
+                    style: TextStyle(
+                      color: status.textColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Divider(),
+                  const Divider(color: AppColors.whiteColor),
                   tasks.isEmpty
                       ? const Center(child: Text("No tasks"))
                       : SizedBox(
-                        height: 150.0,
+                        height: 100.0,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: tasks.length,

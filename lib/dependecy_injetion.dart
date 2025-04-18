@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
-import 'package:taskmanagementapp/core/common/cubit/cubit/app_user_cubit.dart';
+
 import 'package:taskmanagementapp/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:taskmanagementapp/features/auth/data/repository/auth_repo_implementation.dart';
 import 'package:taskmanagementapp/features/auth/domain/repository/auth_repo.dart';
@@ -21,16 +21,13 @@ import 'package:taskmanagementapp/features/taskmanger/taskmanger/bloc/taskmanage
 
 GetIt serviceLocater = GetIt.instance;
 Future<void> initDependecies() async {
-  // Register Firebase dependencies
   serviceLocater.registerLazySingleton<FirebaseFirestore>(
     () => FirebaseFirestore.instance,
   );
   serviceLocater.registerLazySingleton(() => FirebaseAuth.instance);
 
-  // Initialize Auth dependencies
   _initAuth();
 
-  // Initialize Task dependencies
   _initTask();
 }
 
@@ -52,14 +49,8 @@ void _initAuth() {
     ..registerFactory(() => UserSignUp(serviceLocater()))
     ..registerFactory(() => UserLogin(serviceLocater()))
     ..registerFactory(() => UserCurrent(serviceLocater()))
-    ..registerLazySingleton<AppUserCubit>(() => AppUserCubit())
     ..registerLazySingleton(
-      () => AuthBloc(
-        userSignup: serviceLocater(),
-        userLogin: serviceLocater(),
-        userCurrent: serviceLocater(),
-        appUser: serviceLocater(),
-      ),
+      () => AuthBloc(userSignup: serviceLocater(), userLogin: serviceLocater()),
     );
 }
 

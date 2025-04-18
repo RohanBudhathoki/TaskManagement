@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taskmanagementapp/core/common/cubit/cubit/app_user_cubit.dart';
+
 import 'package:taskmanagementapp/dependecy_injetion.dart';
 import 'package:taskmanagementapp/features/auth/presentation/bloc/auth_bloc.dart';
 
@@ -17,7 +17,6 @@ void main() async {
       providers: [
         BlocProvider(create: (_) => serviceLocater<AuthBloc>()),
         BlocProvider(create: (_) => serviceLocater<TaskmanageBloc>()),
-        BlocProvider(create: (_) => serviceLocater<AppUserCubit>()),
       ],
       child: TaskManagementApp(),
     ),

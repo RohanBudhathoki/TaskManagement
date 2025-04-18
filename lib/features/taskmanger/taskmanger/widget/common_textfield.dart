@@ -28,12 +28,12 @@ class TaskFormField extends StatelessWidget {
         fillColor: Colors.white,
         filled: true,
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.green, width: 1),
-          borderRadius: BorderRadius.circular(30),
+          borderSide: const BorderSide(color: Colors.black, width: 1),
+          borderRadius: BorderRadius.circular(12),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(color: Colors.blue, width: 1),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Colors.black, width: 1),
         ),
       ),
     );

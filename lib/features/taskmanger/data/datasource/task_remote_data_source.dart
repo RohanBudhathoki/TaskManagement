@@ -36,11 +36,12 @@ class TaskDataSource implements TaskRemoteDataSources {
     }
 
     try {
-      final tasData = firestore.collection('Tasks').doc();
+      final taskDoc =
+          firestore.collection('users').doc(userId).collection('tasks').doc();
 
-      final taskWithUserId = task.copyWith(userId: userId, id: tasData.id);
+      final taskWithUserId = task.copyWith(userId: userId, id: taskDoc.id);
 
-      await tasData.set(taskWithUserId.toMap());
+      await taskDoc.set(taskWithUserId.toMap());
 
       return taskWithUserId;
     } catch (e) {
@@ -53,8 +54,18 @@ class TaskDataSource implements TaskRemoteDataSources {
     required String taskId,
     required String status,
   }) async {
+    final userId = auth.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+
     try {
-      final docRef = firestore.collection('Tasks').doc(taskId);
+      final docRef = firestore
+          .collection('users')
+          .doc(userId)
+          .collection('tasks')
+          .doc(taskId);
+
       await docRef.update({'status': status});
 
       final updatedSnapshot = await docRef.get();
@@ -72,9 +83,10 @@ class TaskDataSource implements TaskRemoteDataSources {
     }
 
     try {
-      final docref = firestore
-          .collection('Tasks')
-          .where('userId', isEqualTo: userId)
+      final taskStream = firestore
+          .collection('users')
+          .doc(userId)
+          .collection('tasks')
           .snapshots()
           .map((snapshot) {
             print(
@@ -89,14 +101,14 @@ class TaskDataSource implements TaskRemoteDataSources {
             }).toList();
           });
 
-      docref.listen((taskList) {
+      taskStream.listen((taskList) {
         print("✅ Stream emitted a task list with ${taskList.length} tasks");
         if (taskList.isNotEmpty) {
           print("🧾 First Task: ${taskList.first}");
         }
       });
 
-      return docref;
+      return taskStream;
     } catch (e) {
       throw ServerException('Error fetching tasks: ${e.toString()}');
     }
@@ -109,8 +121,19 @@ class TaskDataSource implements TaskRemoteDataSources {
     required String title,
     required String description,
   }) async {
+    final userId = auth.currentUser?.uid;
+    if (userId == null) {
+      throw Exception('User is not logged in');
+    }
+
     try {
-      final docRef = firestore.collection('Tasks').doc(taskId);
+      debugger();
+      final docRef = firestore
+          .collection('users')
+          .doc(userId)
+          .collection('tasks')
+          .doc(taskId);
+
       await docRef.update({
         'status': status,
         'title': title,
@@ -118,6 +141,11 @@ class TaskDataSource implements TaskRemoteDataSources {
       });
 
       final updatedSnapshot = await docRef.get();
+
+      if (!updatedSnapshot.exists) {
+        throw const ServerException('Task not found');
+      }
+
       return TaskModel.fromMap(updatedSnapshot.data()!);
     } catch (e) {
       throw ServerException(e.toString());

@@ -8,13 +8,13 @@ class RegisterTextfield extends StatelessWidget {
 
   final Icon? imagesuffix;
   const RegisterTextfield({
-    Key? key,
+    super.key,
     this.controller,
     required this.hintText,
     required this.keyboardType,
     required this.obscureText,
     this.imagesuffix,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +37,12 @@ class RegisterTextfield extends StatelessWidget {
           fillColor: Colors.white,
           filled: true,
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.green, width: 1),
-            borderRadius: BorderRadius.circular(30),
+            borderSide: const BorderSide(color: Colors.black, width: 1),
+            borderRadius: BorderRadius.circular(12),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: const BorderSide(color: Colors.green, width: 1),
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: Colors.black, width: 1),
           ),
         ),
       ),

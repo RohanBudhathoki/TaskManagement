@@ -14,12 +14,12 @@ class TaskCard extends StatelessWidget {
         color: Colors.transparent,
         child: Container(
           padding: const EdgeInsets.all(8),
-          color: Colors.blue,
+          color: Colors.blueAccent,
           child: Text(task.title, style: const TextStyle(color: Colors.white)),
         ),
       ),
       childWhenDragging: Opacity(
-        opacity: 0.4,
+        opacity: 0.2,
         child: Card(
           child: Padding(
             padding: const EdgeInsets.all(12.0),

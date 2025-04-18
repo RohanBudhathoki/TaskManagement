@@ -98,9 +98,11 @@ class TaskRepoImple implements TaskRepo {
     required String taskId,
   }) async {
     try {
-      final updateTaskStage = await remoteDataSources.updateTaskStage(
+      final updateTaskStage = await remoteDataSources.updateTask(
         taskId: taskId,
         status: taskStatus,
+        description: description,
+        title: title,
       );
       if (updateTaskStage != null) {
         return right(updateTaskStage);
