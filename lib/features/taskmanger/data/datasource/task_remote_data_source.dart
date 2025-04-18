@@ -66,7 +66,6 @@ class TaskDataSource implements TaskRemoteDataSources {
   @override
   Stream<List<TaskModel>> getTasks() {
     try {
-      debugger();
       final docref = firestore.collection('Tasks').snapshots().map((snapshot) {
         print("📦 Snapshot received with ${snapshot.docs.length} documents");
 

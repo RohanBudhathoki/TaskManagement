@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,11 +45,12 @@ class TaskmanageBloc extends Bloc<TaskmanageEvent, TaskmanageState> {
     );
   }
 
-  void _getTasks(GetTaskBLoc event, Emitter<TaskmanageState> emit) {
-    _taskSubscription?.cancel();
+  void _getTasks(GetTaskBLoc event, Emitter<TaskmanageState> emit) async {
+    emit(TaskmanageLoading());
+    await _taskSubscription?.cancel();
 
     _taskSubscription = _getTask(NoParams()).listen(
-      (res) {
+      (res) async {
         res.fold(
           (l) => emit(TaskmanageFailure(l.message)),
           (r) => emit(TaskManageDisplaySucess(r)),

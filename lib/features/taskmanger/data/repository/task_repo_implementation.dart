@@ -45,15 +45,15 @@ class TaskRepoImple implements TaskRepo {
   @override
   Stream<Either<Failure, List<TaskEntity>>> getTasks() async* {
     try {
-      await for (final taskList in remoteDataSources.getTasks()) {
-        yield right<Failure, List<TaskEntity>>(taskList);
+      final stream = remoteDataSources.getTasks();
+      debugger();
+      // Emit real-time updates
+      await for (final taskList in stream) {
+        print("this is Stream ${taskList}");
+        yield right(taskList); // Continuously yield the updated task list
       }
-    } on ServerException catch (e) {
-      yield left<Failure, List<TaskEntity>>(Failure(message: e.toString()));
     } catch (e) {
-      yield left<Failure, List<TaskEntity>>(
-        Failure(message: "Unexpected error: ${e.toString()}"),
-      );
+      yield left(Failure(message: 'Error fetching tasks: ${e.toString()}'));
     }
   }
 
