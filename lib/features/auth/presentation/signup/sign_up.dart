@@ -11,7 +11,8 @@ import 'package:taskmanagementapp/features/auth/presentation/login/login.dart';
 import 'package:taskmanagementapp/features/auth/presentation/signup/widget/signup_form.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+  final _SignUpformKey = GlobalKey<FormState>();
+  SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class SignUpScreen extends StatelessWidget {
           if (state is AuthSucess) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (_) => const LoginScreen()),
+              MaterialPageRoute(builder: (_) => LoginScreen()),
             );
           }
         },
@@ -38,7 +39,7 @@ class SignUpScreen extends StatelessWidget {
             children: [
               IgnorePointer(
                 ignoring: isLoading,
-                child: buildFormSignUp(context, controller),
+                child: buildFormSignUp(context, controller, _SignUpformKey),
               ),
               if (isLoading) const LoadingOverlay(),
             ],

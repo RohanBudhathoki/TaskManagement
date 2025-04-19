@@ -11,7 +11,8 @@ import 'package:taskmanagementapp/features/auth/presentation/login/widget/login_
 import 'package:taskmanagementapp/features/taskmanger/taskmanger/task_screen/task_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  final _loginformKey = GlobalKey<FormState>();
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               IgnorePointer(
                 ignoring: isLoading,
-                child: buildFormSignIn(context, controller),
+                child: buildFormSignIn(context, controller, _loginformKey),
               ),
               if (isLoading) const LoadingOverlay(),
             ],

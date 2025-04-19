@@ -13,6 +13,7 @@ import 'package:taskmanagementapp/features/auth/presentation/widgets/register_te
 Widget buildFormSignIn(
   BuildContext context,
   TextEditingControllers controller,
+  GlobalKey<FormState> formKey,
 ) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -35,6 +36,17 @@ Widget buildFormSignIn(
               keyboardType: TextInputType.emailAddress,
               controller: controller.emailController,
               hintText: 'Email',
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Email is required";
+                }
+                if (!RegExp(
+                  r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}',
+                ).hasMatch(value)) {
+                  return "Enter a valid email";
+                }
+                return null;
+              },
             ),
             const SpaceH20(),
             RegisterTextfield(
@@ -42,6 +54,15 @@ Widget buildFormSignIn(
               keyboardType: TextInputType.text,
               controller: controller.passwordController,
               hintText: 'Password',
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Password is required";
+                }
+                if (value.length < 6) {
+                  return "Password is less than 6 characters";
+                }
+                return null;
+              },
             ),
             SpaceH12(),
             Align(
@@ -66,11 +87,31 @@ Widget buildFormSignIn(
             const SpaceH28(),
             CommonAuthButton(
               onPressed: () {
+                final email = controller.emailController.text.trim();
+                final password = controller.passwordController.text.trim();
+
+                if (email.isEmpty) {
+                  flushBar(context, "Email is required");
+                  return;
+                }
+                if (!RegExp(
+                  r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}$',
+                ).hasMatch(email)) {
+                  flushBar(context, "Enter a valid email");
+                  return;
+                }
+
+                if (password.isEmpty) {
+                  flushBar(context, "Password is required");
+                  return;
+                }
+                if (password.length < 6) {
+                  flushBar(context, "Password must be at least 6 characters");
+                  return;
+                }
+
                 context.read<AuthBloc>().add(
-                  AuthLogin(
-                    email: controller.emailController.text.trim(),
-                    password: controller.passwordController.text.trim(),
-                  ),
+                  AuthLogin(email: email, password: password),
                 );
               },
               text: 'Sign In',

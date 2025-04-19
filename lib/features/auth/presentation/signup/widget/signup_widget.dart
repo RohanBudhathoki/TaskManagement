@@ -6,7 +6,7 @@ Widget buildAlreadyHaveAccount(BuildContext context) {
     onTap: () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const LoginScreen()),
+        MaterialPageRoute(builder: (_) => LoginScreen()),
       );
     },
     child: RichText(

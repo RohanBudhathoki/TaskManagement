@@ -5,8 +5,9 @@ class RegisterTextfield extends StatelessWidget {
   final String hintText;
   final TextInputType keyboardType;
   final bool obscureText;
-
   final Icon? imagesuffix;
+  final String? Function(String?)? validator;
+
   const RegisterTextfield({
     super.key,
     this.controller,
@@ -14,6 +15,7 @@ class RegisterTextfield extends StatelessWidget {
     required this.keyboardType,
     required this.obscureText,
     this.imagesuffix,
+    this.validator,
   });
 
   @override
@@ -25,7 +27,8 @@ class RegisterTextfield extends StatelessWidget {
         obscuringCharacter: '*',
         keyboardType: keyboardType,
         controller: controller,
-        style: TextStyle(color: Colors.black),
+        validator: validator,
+        style: const TextStyle(color: Colors.black),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: const TextStyle(

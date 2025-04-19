@@ -6,7 +6,7 @@ Widget buildSignUpLink(BuildContext context) {
     onTap: () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const SignUpScreen()),
+        MaterialPageRoute(builder: (_) => SignUpScreen()),
       );
     },
     child: RichText(
