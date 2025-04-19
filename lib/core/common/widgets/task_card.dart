@@ -4,8 +4,14 @@ import 'package:taskmanagementapp/features/taskmanger/domain/entities/task_entit
 class TaskCard extends StatelessWidget {
   final TaskEntity task;
   final bool isDragging;
+  final double width;
 
-  const TaskCard({required this.task, this.isDragging = false, super.key});
+  const TaskCard({
+    required this.task,
+    this.isDragging = false,
+    required this.width,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +21,7 @@ class TaskCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       color: isDragging ? Colors.blueAccent : Colors.white,
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.5,
+        width: width, // Use the dynamic width here
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

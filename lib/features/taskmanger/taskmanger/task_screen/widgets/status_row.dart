@@ -46,45 +46,123 @@ class StatusRow extends StatelessWidget {
                         child: Center(child: Text("No tasks")),
                       )
                       : Flexible(
-                        child: SizedBox(
-                          height: 160,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: tasks.length,
-                            separatorBuilder:
-                                (_, __) => const SizedBox(width: 12),
-                            itemBuilder: (context, index) {
-                              final task = tasks[index];
-                              return LongPressDraggable<TaskEntity>(
-                                data: task,
-                                feedback: Material(
-                                  color: Colors.transparent,
-                                  child: TaskCard(task: task, isDragging: true),
-                                ),
-                                childWhenDragging: Opacity(
-                                  opacity: 0.4,
-                                  child: TaskCard(task: task),
-                                ),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder:
-                                            (_) => UpdateTaskScreen(
-                                              taskId: task.id,
-                                              initialTitle: task.title,
-                                              initialDescription:
-                                                  task.description,
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            // Check if the device is in landscape mode
+                            bool isLandscape =
+                                constraints.maxWidth > constraints.maxHeight;
+
+                            // Dynamic height and width adjustment based on orientation
+                            double taskCardWidth =
+                                isLandscape
+                                    ? constraints.maxWidth *
+                                        0.5 // Smaller width for landscape
+                                    : constraints.maxWidth * 1;
+
+                            return isLandscape
+                                ? SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children:
+                                        tasks.map((task) {
+                                          return ConstrainedBox(
+                                            constraints: BoxConstraints(
+                                              maxWidth:
+                                                  taskCardWidth, // Ensure the card doesn't overflow
                                             ),
-                                      ),
-                                    );
-                                  },
-                                  child: TaskCard(task: task),
-                                ),
-                              );
-                            },
-                          ),
+                                            child: GestureDetector(
+                                              onLongPress: () {
+                                                // Start dragging on long press
+                                                context
+                                                    .read<TaskmanageBloc>()
+                                                    .add(
+                                                      UpdateTaskStageBloc(
+                                                        taskId: task.id,
+                                                        status: status.label,
+                                                      ),
+                                                    );
+                                              },
+                                              child: LongPressDraggable<
+                                                TaskEntity
+                                              >(
+                                                data: task,
+                                                feedback: Material(
+                                                  color: Colors.transparent,
+                                                  child: TaskCard(
+                                                    task: task,
+                                                    isDragging: true,
+                                                    width: taskCardWidth,
+                                                  ),
+                                                ),
+                                                childWhenDragging: Opacity(
+                                                  opacity: 0.4,
+                                                  child: TaskCard(
+                                                    task: task,
+                                                    width: taskCardWidth,
+                                                  ),
+                                                ),
+                                                child: TaskCard(
+                                                  task: task,
+                                                  width: taskCardWidth,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }).toList(),
+                                  ),
+                                )
+                                : SingleChildScrollView(
+                                  scrollDirection: Axis.vertical,
+                                  child: Column(
+                                    children:
+                                        tasks.map((task) {
+                                          return ConstrainedBox(
+                                            constraints: BoxConstraints(
+                                              maxWidth:
+                                                  taskCardWidth, // Ensure the card doesn't overflow
+                                            ),
+                                            child: GestureDetector(
+                                              onLongPress: () {
+                                                // Start dragging on long press
+                                                context
+                                                    .read<TaskmanageBloc>()
+                                                    .add(
+                                                      UpdateTaskStageBloc(
+                                                        taskId: task.id,
+                                                        status: status.label,
+                                                      ),
+                                                    );
+                                              },
+                                              child: LongPressDraggable<
+                                                TaskEntity
+                                              >(
+                                                data: task,
+                                                feedback: Material(
+                                                  color: Colors.transparent,
+                                                  child: TaskCard(
+                                                    task: task,
+                                                    isDragging: true,
+                                                    width: taskCardWidth,
+                                                  ),
+                                                ),
+                                                childWhenDragging: Opacity(
+                                                  opacity: 0.4,
+                                                  child: TaskCard(
+                                                    task: task,
+                                                    width: taskCardWidth,
+                                                  ),
+                                                ),
+                                                child: TaskCard(
+                                                  task: task,
+                                                  width: taskCardWidth,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }).toList(),
+                                  ),
+                                );
+                          },
                         ),
                       ),
                 ],

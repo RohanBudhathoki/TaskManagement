@@ -43,7 +43,7 @@ class TaskScreen extends StatelessWidget {
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.power_settings_new),
+                icon: const Icon(Icons.logout),
                 onPressed: () {
                   context.read<AuthBloc>().add(AuthLogout());
                 },
@@ -70,15 +70,43 @@ class TaskScreen extends StatelessWidget {
               if (state is TaskManageDisplaySucess) {
                 final tasks = state.task;
 
-                return Column(
-                  children:
-                      TaskStatus.values.map((status) {
-                        final tasksForStatus =
-                            tasks
-                                .where((task) => task.status == status.label)
-                                .toList();
-                        return StatusRow(status: status, tasks: tasksForStatus);
-                      }).toList(),
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    bool isLandscape =
+                        constraints.maxWidth > constraints.maxHeight;
+
+                    return isLandscape
+                        ? Row(
+                          children:
+                              TaskStatus.values.map((status) {
+                                final tasksForStatus =
+                                    tasks
+                                        .where(
+                                          (task) => task.status == status.label,
+                                        )
+                                        .toList();
+                                return StatusRow(
+                                  status: status,
+                                  tasks: tasksForStatus,
+                                );
+                              }).toList(),
+                        )
+                        : Column(
+                          children:
+                              TaskStatus.values.map((status) {
+                                final tasksForStatus =
+                                    tasks
+                                        .where(
+                                          (task) => task.status == status.label,
+                                        )
+                                        .toList();
+                                return StatusRow(
+                                  status: status,
+                                  tasks: tasksForStatus,
+                                );
+                              }).toList(),
+                        );
+                  },
                 );
               }
 
