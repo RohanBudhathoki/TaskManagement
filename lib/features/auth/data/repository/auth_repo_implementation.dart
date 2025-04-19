@@ -72,4 +72,14 @@ class AuthRepoImple implements AuthRepo {
       return left(Failure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> logout() async {
+    try {
+      await remoteDataSource.logout();
+      return Right(null); // Returning `null` as the response is void
+    } on ServerException catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
 }

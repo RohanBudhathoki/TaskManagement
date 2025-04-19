@@ -5,12 +5,12 @@ import 'package:taskmanagementapp/features/auth/domain/entities/user_entity.dart
 import 'package:taskmanagementapp/features/auth/domain/repository/auth_repo.dart';
 
 class UserSignUp implements UseCase<User, UserSignUpParams> {
-  final AuthRepo authRepository;
+  final AuthRepo authRepo;
 
-  UserSignUp(this.authRepository);
+  UserSignUp(this.authRepo);
   @override
   Future<Either<Failure, User>> call(UserSignUpParams params) async {
-    return await authRepository.signupWitchEmailPassword(
+    return await authRepo.signupWitchEmailPassword(
       name: params.name,
       email: params.email,
       password: params.password,

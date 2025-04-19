@@ -55,7 +55,7 @@ class StatusRow extends StatelessWidget {
                                 (_, __) => const SizedBox(width: 12),
                             itemBuilder: (context, index) {
                               final task = tasks[index];
-                              return Draggable<TaskEntity>(
+                              return LongPressDraggable<TaskEntity>(
                                 data: task,
                                 feedback: Material(
                                   color: Colors.transparent,

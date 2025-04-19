@@ -14,6 +14,7 @@ abstract interface class AuthRemoteDataSource {
     required String password,
   });
   Future<UserModel?> currentUser();
+  Future<void> logout();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -100,6 +101,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return null;
     } catch (e) {
       throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<void> logout() async {
+    try {
+      await firebaseAuth.signOut();
+    } catch (e) {
+      throw ServerException('Logout failed: $e');
     }
   }
 }

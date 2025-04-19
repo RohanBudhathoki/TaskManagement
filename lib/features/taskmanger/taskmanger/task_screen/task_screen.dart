@@ -25,6 +25,10 @@ class TaskScreen extends StatelessWidget {
                 );
               },
             ),
+            IconButton(
+              icon: const Icon(Icons.power_off_outlined),
+              onPressed: () {},
+            ),
           ],
         ),
         body: BlocConsumer<TaskmanageBloc, TaskmanageState>(

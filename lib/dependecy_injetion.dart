@@ -7,6 +7,7 @@ import 'package:taskmanagementapp/features/auth/data/repository/auth_repo_implem
 import 'package:taskmanagementapp/features/auth/domain/repository/auth_repo.dart';
 import 'package:taskmanagementapp/features/auth/domain/usecases/curret_user.dart';
 import 'package:taskmanagementapp/features/auth/domain/usecases/user_login.dart';
+import 'package:taskmanagementapp/features/auth/domain/usecases/user_signout.dart';
 import 'package:taskmanagementapp/features/auth/domain/usecases/user_signup.dart';
 import 'package:taskmanagementapp/features/auth/presentation/bloc/auth_bloc.dart';
 
@@ -49,8 +50,13 @@ void _initAuth() {
     ..registerFactory(() => UserSignUp(serviceLocater()))
     ..registerFactory(() => UserLogin(serviceLocater()))
     ..registerFactory(() => UserCurrent(serviceLocater()))
+    ..registerFactory(() => UserLogout(serviceLocater()))
     ..registerLazySingleton(
-      () => AuthBloc(userSignup: serviceLocater(), userLogin: serviceLocater()),
+      () => AuthBloc(
+        userSignup: serviceLocater(),
+        userLogin: serviceLocater(),
+        userLogout: serviceLocater(),
+      ),
     );
 }
 

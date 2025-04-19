@@ -8,11 +8,6 @@ class TaskManagementApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkThemData,
-      themeMode: ThemeMode.system,
-      home: LoginScreen(),
-    );
+    return MaterialApp(theme: AppTheme.lightTheme, home: LoginScreen());
   }
 }
