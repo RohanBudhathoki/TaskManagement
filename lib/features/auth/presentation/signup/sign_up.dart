@@ -11,7 +11,7 @@ import 'package:taskmanagementapp/features/auth/presentation/login/login.dart';
 import 'package:taskmanagementapp/features/auth/presentation/signup/widget/signup_form.dart';
 
 class SignUpScreen extends StatelessWidget {
-  final _SignUpformKey = GlobalKey<FormState>();
+  final _signUpformKey = GlobalKey<FormState>();
   SignUpScreen({super.key});
 
   @override
@@ -39,7 +39,7 @@ class SignUpScreen extends StatelessWidget {
             children: [
               IgnorePointer(
                 ignoring: isLoading,
-                child: buildFormSignUp(context, controller, _SignUpformKey),
+                child: buildFormSignUp(context, controller, _signUpformKey),
               ),
               if (isLoading) const LoadingOverlay(),
             ],

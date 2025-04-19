@@ -6,7 +6,6 @@ import 'package:taskmanagementapp/features/taskmanger/domain/entities/task_entit
 import 'package:taskmanagementapp/features/taskmanger/taskmanger/bloc/taskmanage_bloc.dart';
 import 'package:taskmanagementapp/core/enum/task_enum.dart';
 import 'package:taskmanagementapp/features/taskmanger/taskmanger/display_task/display_task.dart';
-import 'package:taskmanagementapp/features/taskmanger/taskmanger/update_task/update_task.dart';
 
 class StatusRow extends StatelessWidget {
   final TaskStatus status;

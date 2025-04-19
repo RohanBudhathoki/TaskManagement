@@ -1,4 +1,3 @@
-import 'package:device_preview_plus/device_preview_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:taskmanagementapp/core/theme/app_theme.dart';
 
@@ -9,13 +8,6 @@ class TaskManagementApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
-
-      theme: AppTheme.lightTheme,
-      home: LoginScreen(),
-    );
+    return MaterialApp(theme: AppTheme.lightTheme, home: LoginScreen());
   }
 }
