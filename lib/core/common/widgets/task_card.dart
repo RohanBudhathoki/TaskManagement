@@ -21,7 +21,7 @@ class TaskCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       color: isDragging ? Colors.blueAccent : Colors.white,
       child: Container(
-        width: width, // Use the dynamic width here
+        width: width,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
