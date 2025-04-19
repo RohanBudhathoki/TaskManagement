@@ -5,7 +5,6 @@ import 'package:taskmanagementapp/core/theme/app_colors.dart';
 import 'package:taskmanagementapp/features/taskmanger/domain/entities/task_entity.dart';
 import 'package:taskmanagementapp/features/taskmanger/taskmanger/bloc/taskmanage_bloc.dart';
 import 'package:taskmanagementapp/core/enum/task_enum.dart';
-import 'package:taskmanagementapp/features/taskmanger/taskmanger/update_task/update_task.dart';
 
 class StatusRow extends StatelessWidget {
   final TaskStatus status;
@@ -48,15 +47,12 @@ class StatusRow extends StatelessWidget {
                       : Flexible(
                         child: LayoutBuilder(
                           builder: (context, constraints) {
-                            // Check if the device is in landscape mode
                             bool isLandscape =
                                 constraints.maxWidth > constraints.maxHeight;
 
-                            // Dynamic height and width adjustment based on orientation
                             double taskCardWidth =
                                 isLandscape
-                                    ? constraints.maxWidth *
-                                        0.5 // Smaller width for landscape
+                                    ? constraints.maxWidth * 0.5
                                     : constraints.maxWidth * 1;
 
                             return isLandscape
@@ -67,12 +63,10 @@ class StatusRow extends StatelessWidget {
                                         tasks.map((task) {
                                           return ConstrainedBox(
                                             constraints: BoxConstraints(
-                                              maxWidth:
-                                                  taskCardWidth, // Ensure the card doesn't overflow
+                                              maxWidth: taskCardWidth,
                                             ),
                                             child: GestureDetector(
                                               onLongPress: () {
-                                                // Start dragging on long press
                                                 context
                                                     .read<TaskmanageBloc>()
                                                     .add(
@@ -118,12 +112,10 @@ class StatusRow extends StatelessWidget {
                                         tasks.map((task) {
                                           return ConstrainedBox(
                                             constraints: BoxConstraints(
-                                              maxWidth:
-                                                  taskCardWidth, // Ensure the card doesn't overflow
+                                              maxWidth: taskCardWidth,
                                             ),
                                             child: GestureDetector(
                                               onLongPress: () {
-                                                // Start dragging on long press
                                                 context
                                                     .read<TaskmanageBloc>()
                                                     .add(
