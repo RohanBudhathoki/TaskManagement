@@ -76,7 +76,7 @@ class TaskScreen extends StatelessWidget {
                         constraints.maxWidth > constraints.maxHeight;
 
                     return isLandscape
-                        ? Row(
+                        ? ListView(
                           children:
                               TaskStatus.values.map((status) {
                                 final tasksForStatus =
