@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taskmanagementapp/core/common/utils/flush_bar.dart';
 import 'package:taskmanagementapp/core/common/utils/text_controller.dart';
 import 'package:taskmanagementapp/core/common/widgets/task_textfield.dart';
 import 'package:taskmanagementapp/features/auth/presentation/widgets/comm_auth_button.dart';
@@ -25,11 +26,19 @@ Widget buildFormAddTask(
           const SizedBox(height: 25),
           CommonAuthButton(
             onPressed: () {
+              final title = controller.titleController.text.trim();
+              final description = controller.descriptionController.text.trim();
+
+              if (title.isEmpty || description.isEmpty) {
+                flushBar(
+                  context,
+                  "Please fill in both the title and description.",
+                );
+                return;
+              }
+
               context.read<TaskmanageBloc>().add(
-                CreateTaskBloc(
-                  title: controller.titleController.text.trim(),
-                  description: controller.titleController.text.trim(),
-                ),
+                CreateTaskBloc(title: title, description: description),
               );
             },
             text: "Create Task",

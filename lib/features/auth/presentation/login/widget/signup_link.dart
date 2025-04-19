@@ -4,7 +4,7 @@ import 'package:taskmanagementapp/features/auth/presentation/signup/sign_up.dart
 Widget buildSignUpLink(BuildContext context) {
   return InkWell(
     onTap: () {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const SignUpScreen()),
       );

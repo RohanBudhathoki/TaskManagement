@@ -13,15 +13,17 @@ class AddTaskScreen extends StatelessWidget {
   AddTaskScreen({super.key});
 
   final controller = TextEditingControllers();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _formKey,
       appBar: AppBar(centerTitle: true, title: const Text("Create Task")),
       body: BlocConsumer<TaskmanageBloc, TaskmanageState>(
         listener: (context, state) {
           if (state is TaskmanageSucess) {
-            Navigator.pushReplacement(
+            Navigator.pop(
               context,
               MaterialPageRoute(builder: (_) => const TaskScreen()),
             );

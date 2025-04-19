@@ -4,7 +4,7 @@ import 'package:taskmanagementapp/features/auth/presentation/login/login.dart';
 Widget buildAlreadyHaveAccount(BuildContext context) {
   return InkWell(
     onTap: () {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const LoginScreen()),
       );

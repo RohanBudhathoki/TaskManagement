@@ -35,9 +35,8 @@ class UpdateTaskScreen extends StatelessWidget {
       body: BlocConsumer<TaskmanageBloc, TaskmanageState>(
         listener: (context, state) {
           if (state is TaskStageUpdateState) {
-            print("Navigating to TaskScreen...");
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.pushReplacement(
+              Navigator.pop(
                 context,
                 MaterialPageRoute(builder: (_) => const TaskScreen()),
               );
