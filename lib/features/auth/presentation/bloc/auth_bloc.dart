@@ -60,17 +60,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthSucess(user));
   }
 
-  Stream<AuthState> _onAuthLogOut(
-    AuthEvent event,
-    Emitter<AuthState> emit,
-  ) async* {
-    if (event is AuthLogout) {
-      yield AuthLoading();
-      final result = await _userlogout(NoParams());
-      yield result.fold(
-        (failure) => AuthFailure(failure.message),
-        (sucess) => AuthLogOutSucess(),
-      );
-    }
+  void _onAuthLogOut(AuthLogout event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+
+    final result = await _userlogout(NoParams());
+
+    result.fold(
+      (failure) => emit(AuthFailure(failure.message)),
+      (_) => emit(AuthLogOutSucess()),
+    );
   }
 }
