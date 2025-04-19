@@ -32,7 +32,7 @@ class TaskRepoImple implements TaskRepo {
         title: title,
         description: description,
         status: TaskStatus.pending.label,
-        userId: userId, // Assign the userId to the task
+        userId: userId,
       );
 
       final uploadedTask = await remoteDataSources.create(taskModel);
@@ -62,7 +62,6 @@ class TaskRepoImple implements TaskRepo {
         final userTasks =
             taskList.where((task) => task.userId == userId).toList();
 
-        print("this is Stream ${userTasks}");
         yield right(userTasks);
       }
     } catch (e) {
@@ -98,14 +97,14 @@ class TaskRepoImple implements TaskRepo {
     required String taskId,
   }) async {
     try {
-      final updateTaskStage = await remoteDataSources.updateTask(
+      final updateTask = await remoteDataSources.updateTask(
         taskId: taskId,
         status: taskStatus,
         description: description,
         title: title,
       );
-      if (updateTaskStage != null) {
-        return right(updateTaskStage);
+      if (updateTask != null) {
+        return right(updateTask);
       } else {
         return left(Failure(message: "Failed to update task."));
       }

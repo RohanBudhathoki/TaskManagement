@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SpaceH34 extends StatelessWidget {
-  const SpaceH34({Key? key}) : super(key: key);
+  const SpaceH34({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class SpaceH34 extends StatelessWidget {
 }
 
 class SpaceH4 extends StatelessWidget {
-  const SpaceH4({Key? key}) : super(key: key);
+  const SpaceH4({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class SpaceH4 extends StatelessWidget {
 }
 
 class SpaceH8 extends StatelessWidget {
-  const SpaceH8({Key? key}) : super(key: key);
+  const SpaceH8({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class SpaceH8 extends StatelessWidget {
 }
 
 class SpaceH12 extends StatelessWidget {
-  const SpaceH12({Key? key}) : super(key: key);
+  const SpaceH12({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class SpaceH12 extends StatelessWidget {
 }
 
 class SpaceH16 extends StatelessWidget {
-  const SpaceH16({Key? key}) : super(key: key);
+  const SpaceH16({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class SpaceH16 extends StatelessWidget {
 }
 
 class SpaceH20 extends StatelessWidget {
-  const SpaceH20({Key? key}) : super(key: key);
+  const SpaceH20({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class SpaceH20 extends StatelessWidget {
 }
 
 class SpaceH24 extends StatelessWidget {
-  const SpaceH24({Key? key}) : super(key: key);
+  const SpaceH24({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class SpaceH24 extends StatelessWidget {
 }
 
 class SpaceH30 extends StatelessWidget {
-  const SpaceH30({Key? key}) : super(key: key);
+  const SpaceH30({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class SpaceH30 extends StatelessWidget {
 }
 
 class SpaceH33 extends StatelessWidget {
-  const SpaceH33({Key? key}) : super(key: key);
+  const SpaceH33({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class SpaceH33 extends StatelessWidget {
 }
 
 class SpaceH36 extends StatelessWidget {
-  const SpaceH36({Key? key}) : super(key: key);
+  const SpaceH36({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,7 @@ class SpaceH36 extends StatelessWidget {
 }
 
 class SpaceH40 extends StatelessWidget {
-  const SpaceH40({Key? key}) : super(key: key);
+  const SpaceH40({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +100,7 @@ class SpaceH40 extends StatelessWidget {
 }
 
 class SpaceH50 extends StatelessWidget {
-  const SpaceH50({Key? key}) : super(key: key);
+  const SpaceH50({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +109,7 @@ class SpaceH50 extends StatelessWidget {
 }
 
 class SpaceH60 extends StatelessWidget {
-  const SpaceH60({Key? key}) : super(key: key);
+  const SpaceH60({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +118,7 @@ class SpaceH60 extends StatelessWidget {
 }
 
 class SpaceH80 extends StatelessWidget {
-  const SpaceH80({Key? key}) : super(key: key);
+  const SpaceH80({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +127,7 @@ class SpaceH80 extends StatelessWidget {
 }
 
 class SpaceH100 extends StatelessWidget {
-  const SpaceH100({Key? key}) : super(key: key);
+  const SpaceH100({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +136,7 @@ class SpaceH100 extends StatelessWidget {
 }
 
 class SpaceH180 extends StatelessWidget {
-  const SpaceH180({Key? key}) : super(key: key);
+  const SpaceH180({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +145,7 @@ class SpaceH180 extends StatelessWidget {
 }
 
 class SpaceH28 extends StatelessWidget {
-  const SpaceH28({Key? key}) : super(key: key);
+  const SpaceH28({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +154,7 @@ class SpaceH28 extends StatelessWidget {
 }
 
 class SpaceH21 extends StatelessWidget {
-  const SpaceH21({Key? key}) : super(key: key);
+  const SpaceH21({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +163,7 @@ class SpaceH21 extends StatelessWidget {
 }
 
 class SpaceH32 extends StatelessWidget {
-  const SpaceH32({Key? key}) : super(key: key);
+  const SpaceH32({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +172,7 @@ class SpaceH32 extends StatelessWidget {
 }
 
 class SpaceH113 extends StatelessWidget {
-  const SpaceH113({Key? key}) : super(key: key);
+  const SpaceH113({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +181,7 @@ class SpaceH113 extends StatelessWidget {
 }
 
 class SpaceH200 extends StatelessWidget {
-  const SpaceH200({Key? key}) : super(key: key);
+  const SpaceH200({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +190,7 @@ class SpaceH200 extends StatelessWidget {
 }
 
 class SpaceH44 extends StatelessWidget {
-  const SpaceH44({Key? key}) : super(key: key);
+  const SpaceH44({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -199,7 +199,7 @@ class SpaceH44 extends StatelessWidget {
 }
 
 class SpaceH48 extends StatelessWidget {
-  const SpaceH48({Key? key}) : super(key: key);
+  const SpaceH48({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -208,7 +208,7 @@ class SpaceH48 extends StatelessWidget {
 }
 
 class SpaceH96 extends StatelessWidget {
-  const SpaceH96({Key? key}) : super(key: key);
+  const SpaceH96({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -218,7 +218,7 @@ class SpaceH96 extends StatelessWidget {
 
 //Widths
 class SpaceW4 extends StatelessWidget {
-  const SpaceW4({Key? key}) : super(key: key);
+  const SpaceW4({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +227,7 @@ class SpaceW4 extends StatelessWidget {
 }
 
 class SpaceW8 extends StatelessWidget {
-  const SpaceW8({Key? key}) : super(key: key);
+  const SpaceW8({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -236,7 +236,7 @@ class SpaceW8 extends StatelessWidget {
 }
 
 class SpaceW12 extends StatelessWidget {
-  const SpaceW12({Key? key}) : super(key: key);
+  const SpaceW12({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -245,7 +245,7 @@ class SpaceW12 extends StatelessWidget {
 }
 
 class SpaceW16 extends StatelessWidget {
-  const SpaceW16({Key? key}) : super(key: key);
+  const SpaceW16({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -254,7 +254,7 @@ class SpaceW16 extends StatelessWidget {
 }
 
 class SpaceW20 extends StatelessWidget {
-  const SpaceW20({Key? key}) : super(key: key);
+  const SpaceW20({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -263,7 +263,7 @@ class SpaceW20 extends StatelessWidget {
 }
 
 class SpaceW24 extends StatelessWidget {
-  const SpaceW24({Key? key}) : super(key: key);
+  const SpaceW24({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -272,7 +272,7 @@ class SpaceW24 extends StatelessWidget {
 }
 
 class SpaceW30 extends StatelessWidget {
-  const SpaceW30({Key? key}) : super(key: key);
+  const SpaceW30({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -281,7 +281,7 @@ class SpaceW30 extends StatelessWidget {
 }
 
 class SpaceW36 extends StatelessWidget {
-  const SpaceW36({Key? key}) : super(key: key);
+  const SpaceW36({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -290,7 +290,7 @@ class SpaceW36 extends StatelessWidget {
 }
 
 class SpaceW40 extends StatelessWidget {
-  const SpaceW40({Key? key}) : super(key: key);
+  const SpaceW40({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -299,7 +299,7 @@ class SpaceW40 extends StatelessWidget {
 }
 
 class SpaceW48 extends StatelessWidget {
-  const SpaceW48({Key? key}) : super(key: key);
+  const SpaceW48({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -308,7 +308,7 @@ class SpaceW48 extends StatelessWidget {
 }
 
 class SpaceW60 extends StatelessWidget {
-  const SpaceW60({Key? key}) : super(key: key);
+  const SpaceW60({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -317,7 +317,7 @@ class SpaceW60 extends StatelessWidget {
 }
 
 class SpaceW148 extends StatelessWidget {
-  const SpaceW148({Key? key}) : super(key: key);
+  const SpaceW148({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -326,7 +326,7 @@ class SpaceW148 extends StatelessWidget {
 }
 
 class SpaceW2 extends StatelessWidget {
-  const SpaceW2({Key? key}) : super(key: key);
+  const SpaceW2({super.key});
 
   @override
   Widget build(BuildContext context) {

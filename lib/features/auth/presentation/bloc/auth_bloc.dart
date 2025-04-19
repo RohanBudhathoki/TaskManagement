@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taskmanagementapp/core/common/cubit/cubit/app_user_cubit.dart';
-import 'package:taskmanagementapp/core/usecase/usecases.dart';
+
 import 'package:taskmanagementapp/features/auth/domain/entities/user_entity.dart';
-import 'package:taskmanagementapp/features/auth/domain/usecases/curret_user.dart';
+
 import 'package:taskmanagementapp/features/auth/domain/usecases/user_login.dart';
 import 'package:taskmanagementapp/features/auth/domain/usecases/user_signup.dart';
 
@@ -24,7 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthSignUp>(_onAuthSignUp);
   }
   void _onAuthSignUp(AuthSignUp event, Emitter<AuthState> emit) async {
-    AuthLoading();
+    emit(AuthLoading());
     final response = await _userSignUp(
       UserSignUpParams(
         email: event.email,
@@ -39,6 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   void _onAuthLogin(AuthLogin event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
     final response = await _userLogin(
       UserLoginParams(password: event.password, email: event.email),
     );

@@ -21,7 +21,7 @@ class TaskScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const AddTaskScreen()),
+                  MaterialPageRoute(builder: (_) => AddTaskScreen()),
                 );
               },
             ),

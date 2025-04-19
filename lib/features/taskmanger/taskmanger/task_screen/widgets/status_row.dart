@@ -27,7 +27,7 @@ class StatusRow extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             color: status.cardColor,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -41,35 +41,29 @@ class StatusRow extends StatelessWidget {
                   ),
                   const Divider(color: AppColors.whiteColor),
                   tasks.isEmpty
-                      ? const Center(child: Text("No tasks"))
-                      : SizedBox(
-                        height: 100.0,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: tasks.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0,
-                              ),
-                              child: Draggable<TaskEntity>(
-                                data: tasks[index],
+                      ? const Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Center(child: Text("No tasks")),
+                      )
+                      : Flexible(
+                        child: SizedBox(
+                          height: 160,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: tasks.length,
+                            separatorBuilder:
+                                (_, __) => const SizedBox(width: 12),
+                            itemBuilder: (context, index) {
+                              final task = tasks[index];
+                              return Draggable<TaskEntity>(
+                                data: task,
                                 feedback: Material(
                                   color: Colors.transparent,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(8),
-                                    color: Colors.blue,
-                                    child: Text(
-                                      tasks[index].title,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
+                                  child: TaskCard(task: task, isDragging: true),
                                 ),
                                 childWhenDragging: Opacity(
-                                  opacity: 1,
-                                  child: TaskCard(task: tasks[index]),
+                                  opacity: 0.4,
+                                  child: TaskCard(task: task),
                                 ),
                                 child: GestureDetector(
                                   onTap: () {
@@ -78,19 +72,19 @@ class StatusRow extends StatelessWidget {
                                       MaterialPageRoute(
                                         builder:
                                             (_) => UpdateTaskScreen(
-                                              taskId: tasks[index].id,
-                                              initialTitle: tasks[index].title,
+                                              taskId: task.id,
+                                              initialTitle: task.title,
                                               initialDescription:
-                                                  tasks[index].description,
+                                                  task.description,
                                             ),
                                       ),
                                     );
                                   },
-                                  child: TaskCard(task: tasks[index]),
+                                  child: TaskCard(task: task),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
                       ),
                 ],

@@ -30,7 +30,7 @@ class TaskmanageBloc extends Bloc<TaskmanageEvent, TaskmanageState> {
        _updateTask = updateTask,
        super(TaskmanageInitial()) {
     on<TaskmanageEvent>((event, emit) {
-      TaskmanageLoading();
+      emit(TaskmanageLoading());
     });
 
     on<CreateTaskBloc>(_createTasks);
@@ -40,6 +40,7 @@ class TaskmanageBloc extends Bloc<TaskmanageEvent, TaskmanageState> {
     on<UpdateTaskBloc>(_updateTasks);
   }
   void _createTasks(CreateTaskBloc event, Emitter<TaskmanageState> emit) async {
+    emit(TaskmanageLoading());
     final res = await _createTask(
       CreateTaskParams(title: event.title, description: event.description),
     );
@@ -95,6 +96,8 @@ class TaskmanageBloc extends Bloc<TaskmanageEvent, TaskmanageState> {
   }
 
   void _updateTasks(UpdateTaskBloc event, Emitter<TaskmanageState> emit) async {
+    emit(TaskmanageLoading());
+
     final res = await _updateTask(
       UpdateTaskParams(
         stautus: event.status,
@@ -105,8 +108,12 @@ class TaskmanageBloc extends Bloc<TaskmanageEvent, TaskmanageState> {
     );
 
     res.fold(
-      (l) => emit(TaskmanageFailure(l.message)),
-      (r) => emit(TaskmanageSucess()),
+      (l) {
+        emit(TaskmanageFailure(l.message));
+      },
+      (r) {
+        emit(TaskStageUpdateState());
+      },
     );
   }
 }

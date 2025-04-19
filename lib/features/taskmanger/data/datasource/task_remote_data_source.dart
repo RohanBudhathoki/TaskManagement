@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:taskmanagementapp/core/error/exception.dart';
 import 'package:taskmanagementapp/features/taskmanger/data/models/task_model.dart';
-import 'package:taskmanagementapp/features/taskmanger/domain/usecases/update_task.dart';
 
 abstract interface class TaskRemoteDataSources {
   Future<TaskModel?> create(TaskModel task);
@@ -89,23 +86,15 @@ class TaskDataSource implements TaskRemoteDataSources {
           .collection('tasks')
           .snapshots()
           .map((snapshot) {
-            print(
-              "📦 Snapshot received with ${snapshot.docs.length} documents",
-            );
-
             return snapshot.docs.map((doc) {
               final data = doc.data();
-              print("📄 Document data: $data");
 
               return TaskModel.fromMap(data);
             }).toList();
           });
 
       taskStream.listen((taskList) {
-        print("✅ Stream emitted a task list with ${taskList.length} tasks");
-        if (taskList.isNotEmpty) {
-          print("🧾 First Task: ${taskList.first}");
-        }
+        if (taskList.isNotEmpty) {}
       });
 
       return taskStream;
@@ -122,6 +111,7 @@ class TaskDataSource implements TaskRemoteDataSources {
     required String description,
   }) async {
     final userId = auth.currentUser?.uid;
+
     if (userId == null) {
       throw Exception('User is not logged in');
     }

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:taskmanagementapp/core/enum/task_enum.dart';
 import 'package:taskmanagementapp/features/taskmanger/domain/entities/task_entity.dart';
 
 class TaskModel extends TaskEntity {
