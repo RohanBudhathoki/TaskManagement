@@ -5,6 +5,7 @@ import 'package:taskmanagementapp/core/theme/app_colors.dart';
 import 'package:taskmanagementapp/features/taskmanger/domain/entities/task_entity.dart';
 import 'package:taskmanagementapp/features/taskmanger/taskmanger/bloc/taskmanage_bloc.dart';
 import 'package:taskmanagementapp/core/enum/task_enum.dart';
+import 'package:taskmanagementapp/features/taskmanger/taskmanger/display_task/display_task.dart';
 import 'package:taskmanagementapp/features/taskmanger/taskmanger/update_task/update_task.dart';
 
 class StatusRow extends StatelessWidget {
@@ -53,7 +54,7 @@ class StatusRow extends StatelessWidget {
 
                             double taskCardWidth =
                                 isLandscape
-                                    ? constraints.maxWidth * 0.4
+                                    ? constraints.maxWidth * 0.5
                                     : constraints.maxWidth * 1;
 
                             return isLandscape
@@ -98,20 +99,13 @@ class StatusRow extends StatelessWidget {
                                                 ),
                                                 child: GestureDetector(
                                                   onTap: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder:
-                                                            (
-                                                              _,
-                                                            ) => UpdateTaskScreen(
-                                                              taskId: task.id,
-                                                              initialTitle:
-                                                                  task.title,
-                                                              initialDescription:
-                                                                  task.description,
-                                                            ),
-                                                      ),
+                                                    showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (_) =>
+                                                              DisplayTaskContents(
+                                                                task: task,
+                                                              ),
                                                     );
                                                   },
                                                   child: TaskCard(
@@ -164,9 +158,21 @@ class StatusRow extends StatelessWidget {
                                                     width: taskCardWidth,
                                                   ),
                                                 ),
-                                                child: TaskCard(
-                                                  task: task,
-                                                  width: taskCardWidth,
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (_) =>
+                                                              DisplayTaskContents(
+                                                                task: task,
+                                                              ),
+                                                    );
+                                                  },
+                                                  child: TaskCard(
+                                                    task: task,
+                                                    width: taskCardWidth,
+                                                  ),
                                                 ),
                                               ),
                                             ),
